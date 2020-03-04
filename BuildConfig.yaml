@@ -1,0 +1,11 @@
+kind: "BuildConfig"
+apiVersion: build.openshift.io/v1
+metadata:
+  name: "dockerspringpetclinic"
+spec:
+  source:
+    git:
+      uri: "https://github.com/rajvaranasi/petspringdocker.git"
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
