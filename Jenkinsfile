@@ -34,7 +34,7 @@ node("maven") {
             stage('Tag Images') {
               openshift.withCluster() {
                 openshift.withProject(){
-                  openshift.tag("dockerspringpetclinic:latest", "dockerspringpetclinic:dev")
+                  openshift.tag("ieopetclinic:latest", "ieopetclinic:dev")
                 }
               }
             }
