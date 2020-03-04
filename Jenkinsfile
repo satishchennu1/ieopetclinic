@@ -18,15 +18,10 @@ node("maven") {
               archive 'target/*.jar'
               step([$class: 'JacocoPublisher', execPattern: '**/target/jacoco.exec'])
              }
-            stage('Code Quality Using SonarQube') {
-              withSonarQubeEnv('SonarQube') { 
-                echo "mvn sonar:sonar -Dsonar.host.url=http://sonarqube-sonarqubeanalysis.apps.ocppilot.ocpcontainer.com/ -DskipTests=true"
-              }
-            }
             stage("Deploy to DeveloperSandBox") {
               openshift.withCluster() {
                 openshift.withProject() {
-                  def dc = openshift.selector('dc', "dockerspringpetclinic")
+                  def dc = openshift.selector('dc', "ieopetclinic")
                   dc.rollout().status()
                 }
               }
