@@ -4,13 +4,13 @@ node("maven") {
               // Get some code from a GitHub repository
               git url: "https://github.com/rajvaranasi/petspringdocker.git", branch: "master" 
             }//checkout code stage
-            stage("Build WAR Using Maven") {
-                sh "mvn clean package -Popenshift"
+            stage("Clean WorkSpace") {
+                sh "mvn clean"
               }//building the war file
             stage('Build Image'){
               openshift.withCluster(){
                 openshift.withProject(){
-                  sh "oc start-build dockerspringpetclinic --from-dir . --follow"  
+                  sh "oc start-build ieopetclinic --from-dir . --follow"  
                 }
               }
             }
