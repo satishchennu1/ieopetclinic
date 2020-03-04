@@ -31,6 +31,11 @@ node("maven") {
                 }
               }
             }
+           
+            stage("approval Message to deploy in DEV") {
+              input message: "Need approval to move to DEV environment: Approve?", id: "approval"
+            }
+
             stage('Tag Images') {
               openshift.withCluster() {
                 openshift.withProject(){
@@ -42,14 +47,12 @@ node("maven") {
               openshift.withCluster(){
                 openshift.withProject(){
                   openshift.tag("dockerspringpetclinic:latest", "dockerspringpetclinic:dev")
-                  echo "oc delete all -l app=dockerspringpetclinic-dev"
-                  sleep 30
                   openshift.selector("dc","dockerspringpetclinic-dev").rollout().status()
                 }
               }
             }
-            stage("approval Message") {
-              input message: "Need approval to move to Controlled Environment: Approve?", id: "approval"
+            stage("approval Message to deploy in UAT") {
+              input message: "Need approval to move to Controlled UAT Environment: Approve?", id: "approval"
             }          
             stage('Promote to UAT'){
               openshift.withCluster(){
