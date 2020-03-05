@@ -42,7 +42,7 @@ node("maven") {
               openshift.withCluster(){
                 openshift.withProject(){
                   openshift.tag("ieopetclinic:latest", "ieopetclinic:dev")
-                  openshift.selector("dc","ieopetclinic:dev").rollout().status()
+                  openshift.selector("dc","ieopetclinic-dev").rollout().status()
                 }
               }
             }
@@ -53,7 +53,7 @@ node("maven") {
               openshift.withCluster(){
                 openshift.withProject(){
                   openshift.tag("ieopetclinic:latest", "ieopetclinic:uat")
-                  openshift.selector("dc","ieopetclini:uat").rollout().status()
+                  openshift.selector("dc","ieopetclinic-uat").rollout().status()
                 }
               }
             }
