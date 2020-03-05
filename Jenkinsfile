@@ -34,14 +34,14 @@ node("maven") {
             stage('Tag Images') {
               openshift.withCluster() {
                 openshift.withProject(){
-                  openshift.tag("ieopetclinic:latest", "ieopetclinic-dev")
+                  openshift.tag("ieopetclinic:latest", "ieopetclinic-dev:latest")
                 }
               }
             }
             stage('Promote to DEV'){
               openshift.withCluster(){
                 openshift.withProject(){
-                  openshift.tag("ieopetclinic:latest", "ieopetclinic-dev")
+                  openshift.tag("ieopetclinic:latest", "ieopetclinic-dev:latest")
                   openshift.selector("dc","ieopetclinic-dev:latest").rollout().status()
                 }
               }
@@ -52,7 +52,7 @@ node("maven") {
             stage('Promote to UAT'){
               openshift.withCluster(){
                 openshift.withProject(){
-                  openshift.tag("ieopetclinic:latest", "ieopetclinic-uat")
+                  openshift.tag("ieopetclinic:latest", "ieopetclinic-uat:latest")
                   openshift.selector("dc","ieopetclinic-uat").rollout().status()
                 }
               }
