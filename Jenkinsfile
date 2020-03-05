@@ -2,7 +2,7 @@ node("maven") {
           timeout(time: 20,unit: 'MINUTES'){
             stage('checkout code from git'){ // for display purposes
               // Get some code from a GitHub repository
-              git url: "https://github.com/rajvaranasi/petspringdocker.git", branch: "master" 
+              git url: "https://github.com/rajvaranasi/ieopetclinic.git", branch: "master" 
             }//checkout code stage
             stage("Clean WorkSpace") {
                 sh "mvn clean"
